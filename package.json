@@ -1,0 +1,22 @@
+{
+  "name": "imutamblex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "onboarding:user-registration": "ts-node -r tsconfig-paths/register -r dotenv/config ./src/onboarding/1-user-registration.ts"
+  },
+  "dependencies": {
+    "@ethersproject/providers": "^5.6.8",
+    "@ethersproject/wallet": "^5.6.2",
+    "@imtbl/core-sdk": "^0.4.0",
+    "@imtbl/imx-sdk": "^1.21.4",
+    "dotenv": "^16.0.1",
+    "ethers": "^5.6.9",
+    "ts-node": "^10.8.2",
+    "tsconfig-paths": "^4.0.0"
+  }
+}
