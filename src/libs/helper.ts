@@ -104,6 +104,54 @@ export const depositERC20 = async (user: ImmutableXClient, token: string, symbol
     }
 }
 
+export const sendERC20 = async (user: ImmutableXClient, toAddress: string, token: string, symbol: string, tokenAddress: string, decimals: number = 18) => {
+    const value = parseEther(token);
+    try {
+        const response = await user.transfer({
+            sender: user.address,
+            token: {
+                type: ERC20TokenType.ERC20,
+                data: {
+                    symbol: symbol,
+                    decimals: decimals,
+                    tokenAddress: tokenAddress
+                }
+            },
+            quantity: value,
+            receiver: toAddress
+        })
+        return response;
+    } catch (error) {
+        return Promise.reject({
+            message: "Error in Sending ERC20 funds in immutable",
+            rawError: error
+        })
+    }
+}
+
+export const sendNativeToken = async (user: ImmutableXClient, toAddress: string, token: string, decimals: number = 18) => {
+    const value = parseEther(token);
+    try {
+        const response = await user.transfer({
+            sender: user.address,
+            token: {
+                type: ETHTokenType.ETH,
+                data: {
+                    decimals: decimals,
+                }
+            },
+            quantity: value,
+            receiver: toAddress
+        })
+        return response;
+    } catch (error) {
+        return Promise.reject({
+            message: "Error in Sending Native funds in immutable",
+            rawError: error
+        })
+    }
+}
+
 export const getUserAssets = async (user: ImmutableXClient) => {
     try {
         const assetResp = await user.getAssets({
